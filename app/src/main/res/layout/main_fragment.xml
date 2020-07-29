@@ -2,44 +2,92 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
         <variable
             name="viewModel"
             type="com.kunalmadan.github.main.MainViewModel" />
     </data>
 
-<RelativeLayout
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp"
-    tools:context=".main.MainFragment">
-
-
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:paddingTop="30dp">
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        tools:context=".main.MainFragment">
 
-        <EditText
-            android:id="@+id/text_repo"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:inputType="text"
-            android:hint="Enter your Github username here" />
 
-        <Button
+        <RelativeLayout
+            android:id="@+id/search_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_repo"
             android:layout_centerHorizontal="true"
-            android:text="SEARCH"/>
+            android:gravity="center"
+            android:paddingTop="30dp">
+
+            <EditText
+                android:id="@+id/text_repo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_your_github_username_here"
+                android:inputType="text"
+                android:onTextChanged="@{viewModel.onTextChanged}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_repo"
+                android:layout_centerHorizontal="true"
+                android:onClick="@{() -> viewModel.onSearchClicked()}"
+                android:text="SEARCH" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/data_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/search_layout"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@{viewModel.userInfo.name}"
+                tools:text="hello" />
+
+            <TextView
+                android:id="@+id/company"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@{viewModel.userInfo.company}"
+                tools:text="hello" />
+            <Button
+                android:id="@+id/button_repositories"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SHOW REPOSITORIES"/>
+
+            <ImageView
+                android:id="@+id/main_photo_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/company"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{viewModel.userInfo.avatar_url}"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+
+
+        </RelativeLayout>
+
+
     </RelativeLayout>
-
-
-
-</RelativeLayout>
 
 </layout>
