@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
+import com.google.android.material.snackbar.Snackbar
 import com.kunalmadan.github.R
 import com.kunalmadan.github.databinding.DetailFragmentBinding
+import com.kunalmadan.github.main.GithubApiStatus
 
 class DetailFragment : Fragment() {
 
@@ -34,8 +36,30 @@ class DetailFragment : Fragment() {
 
         binding.repositoryList.itemAnimator = DefaultItemAnimator()
         detailFragmentViewModel.repositoryInfo.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.data = it
+            it.let {
+                if(it.isEmpty()){
+                    binding.emptyRepositories.visibility = View.VISIBLE
+                } else {
+                    adapter.data = it
+                }
+            }
+        })
+
+        detailFragmentViewModel.status.observe(viewLifecycleOwner, Observer {
+                status->
+            when (status){
+                GithubApiStatus.ERROR ->{
+                    binding.loader.visibility = View.GONE
+                    Snackbar.make(
+                        activity!!.findViewById(android.R.id.content),
+                        "Error Loading Repositories",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                GithubApiStatus.LOADING ->
+                    binding.loader.visibility = View.VISIBLE
+                GithubApiStatus.DONE ->
+                    binding.loader.visibility = View.GONE
             }
         })
 

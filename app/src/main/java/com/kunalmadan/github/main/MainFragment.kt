@@ -43,25 +43,22 @@ class MainFragment : Fragment() {
             status->
             hideSoftKeyBoard(activity!!,activity!!.findViewById(android.R.id.content) )
             when (status){
-                GithubApiStatus.ERROR -> Snackbar.make(
-                    activity!!.findViewById(android.R.id.content),
-                    "error",
-                    Snackbar.LENGTH_SHORT // How long to display the message.
-                ).show()
-                GithubApiStatus.LOADING -> Snackbar.make(
-                    activity!!.findViewById(android.R.id.content),
-                    "loader",
-                    Snackbar.LENGTH_SHORT // How long to display the message.
-                ).show()
-                GithubApiStatus.DONE -> Snackbar.make(
-                    activity!!.findViewById(android.R.id.content),
-                    "completed",
-                    Snackbar.LENGTH_SHORT // How long to display the message.
-                ).show()
+                GithubApiStatus.ERROR ->{
+                    binding.loader.visibility = View.GONE
+                    Snackbar.make(
+                        activity!!.findViewById(android.R.id.content),
+                        "User name does not exists.",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                GithubApiStatus.LOADING ->
+                    binding.loader.visibility = View.VISIBLE
+                GithubApiStatus.DONE ->
+                    binding.loader.visibility = View.GONE
                 GithubApiStatus.EMPTY -> Snackbar.make(
                     activity!!.findViewById(android.R.id.content),
-                    "empty",
-                    Snackbar.LENGTH_SHORT // How long to display the message.
+                    "Kindly enter a user name to proceed.",
+                    Snackbar.LENGTH_SHORT
                 ).show()
             }
         })
@@ -69,11 +66,9 @@ class MainFragment : Fragment() {
         viewModel.enteredUserName.observe(viewLifecycleOwner, Observer {
             username ->
             name = username
-            //this.findNavController().navigate(MainFragmentDirections.actionShowDetail(username))
         })
 
         binding.buttonRepositories.setOnClickListener {
-            //Navigation.createNavigateOnClickListener(MainFragmentDirections.actionShowDetail(it))
             this.findNavController().navigate(MainFragmentDirections.actionShowDetail(name))
         }
         return binding.root

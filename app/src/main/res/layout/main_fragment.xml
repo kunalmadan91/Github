@@ -83,9 +83,16 @@
                 app:imageUrl="@{viewModel.userInfo.avatar_url}"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
-
-
         </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/loader"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:src="@drawable/loading_animation"
+            />
 
 
     </RelativeLayout>

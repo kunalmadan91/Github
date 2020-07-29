@@ -62,14 +62,10 @@ class MainViewModel : ViewModel() {
                 _userInfo.value = listResult
             } catch (e: Exception) {
                 _status.value = GithubApiStatus.ERROR
-                //_userInfo.value = User()
+                _userInfo.value = null
             }
         }
     }
-
-   /* fun showRepositories() {
-        _enteredUserName.value = textEntered
-    }*/
 
     override fun onCleared() {
         super.onCleared()
