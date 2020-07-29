@@ -2,4 +2,6 @@
     <string name="app_name">Github</string>
     <string name="enter_your_github_username_here">Enter your Github username here</string>
     <string name="show_repositories">SHOW REPOSITORIES</string>
+    <string name="search">SEARCH</string>
+    <string name="no_public_repositories_available">No public repositories available</string>
 </resources>

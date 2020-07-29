@@ -58,8 +58,10 @@ class DetailFragment : Fragment() {
                 }
                 GithubApiStatus.LOADING ->
                     binding.loader.visibility = View.VISIBLE
-                GithubApiStatus.DONE ->
+                GithubApiStatus.DONE -> {
+                    binding.totalCount.visibility = View.VISIBLE
                     binding.loader.visibility = View.GONE
+                }
             }
         })
 

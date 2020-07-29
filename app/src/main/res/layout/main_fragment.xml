@@ -19,7 +19,7 @@
 
         <RelativeLayout
             android:id="@+id/search_layout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:gravity="center"
@@ -39,7 +39,7 @@
                 android:layout_below="@+id/text_repo"
                 android:layout_centerHorizontal="true"
                 android:onClick="@{() -> viewModel.onSearchClicked()}"
-                android:text="SEARCH" />
+                android:text="@string/search" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -76,8 +76,8 @@
 
             <ImageView
                 android:id="@+id/main_photo_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_below="@id/company"
                 android:scaleType="centerCrop"
                 app:imageUrl="@{viewModel.userInfo.avatar_url}"
