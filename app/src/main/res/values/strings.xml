@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Github</string>
     <string name="enter_your_github_username_here">Enter your Github username here</string>
+    <string name="show_repositories">SHOW REPOSITORIES</string>
 </resources>

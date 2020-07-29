@@ -12,13 +12,17 @@ import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.kunalmadan.github.R
 import com.kunalmadan.github.databinding.MainFragmentBinding
+import com.kunalmadan.github.detail.DetailFragment
 
 class MainFragment : Fragment() {
 
     private val TAG = MainFragment::class.java.simpleName
+
+    private var name = ""
 
     private val viewModel: MainViewModel by lazy {
         ViewModelProviders.of(this).get(MainViewModel::class.java)
@@ -62,9 +66,15 @@ class MainFragment : Fragment() {
             }
         })
 
+        viewModel.enteredUserName.observe(viewLifecycleOwner, Observer {
+            username ->
+            name = username
+            //this.findNavController().navigate(MainFragmentDirections.actionShowDetail(username))
+        })
+
         binding.buttonRepositories.setOnClickListener {
-            Navigation.createNavigateOnClickListener(R.id.action_showDetail)
-           //view.findNavController().navigate(R.id.action_showDetail)
+            //Navigation.createNavigateOnClickListener(MainFragmentDirections.actionShowDetail(it))
+            this.findNavController().navigate(MainFragmentDirections.actionShowDetail(name))
         }
         return binding.root
     }

@@ -20,8 +20,7 @@
         android:label="fragment_detail"
         tools:layout="@layout/detail_fragment">
         <argument
-            android:name="selectedProperty"
-            app:argType=""
-            />
+            android:name="userName"
+            app:argType="string" />
     </fragment>
 </navigation>

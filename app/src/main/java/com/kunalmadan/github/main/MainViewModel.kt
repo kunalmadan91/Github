@@ -35,7 +35,7 @@ class MainViewModel : ViewModel() {
     private val _enteredUserName = MutableLiveData<String>()
 
     // The external immutable LiveData for the navigation property
-    val navigateToSelectedProperty: LiveData<String>
+    val enteredUserName: LiveData<String>
         get() = _enteredUserName
 
     fun onTextChanged(
@@ -45,6 +45,7 @@ class MainViewModel : ViewModel() {
         count: Int
     ) {
         textEntered = s.toString();
+        _enteredUserName.value = textEntered
     }
 
     fun onSearchClicked(){
@@ -66,9 +67,9 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun showRepositories() {
+   /* fun showRepositories() {
         _enteredUserName.value = textEntered
-    }
+    }*/
 
     override fun onCleared() {
         super.onCleared()

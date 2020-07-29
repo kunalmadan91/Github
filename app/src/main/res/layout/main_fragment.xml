@@ -72,7 +72,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="SHOW REPOSITORIES"/>
+                android:text="@string/show_repositories"/>
 
             <ImageView
                 android:id="@+id/main_photo_image"
