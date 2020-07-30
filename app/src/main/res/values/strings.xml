@@ -4,4 +4,7 @@
     <string name="show_repositories">SHOW REPOSITORIES</string>
     <string name="search">SEARCH</string>
     <string name="no_public_repositories_available">No public repositories available</string>
+    <string name="username_not_exists">User name does not exists.</string>
+    <string name="empty_user_name">Kindly enter a user name to proceed.</string>
+    <string name="error_loading_repos">Error Loading Repositories</string>
 </resources>

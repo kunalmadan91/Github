@@ -20,21 +20,16 @@ class MainViewModel : ViewModel() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private val _userInfo = MutableLiveData<User>()
-
     val userInfo: LiveData<User>
         get() = _userInfo
 
     private val _status = MutableLiveData<GithubApiStatus>()
-
-    private var textEntered: String = ""
-
     val status: LiveData<GithubApiStatus>
         get() = _status
 
+    private var textEntered: String = ""
 
     private val _enteredUserName = MutableLiveData<String>()
-
-    // The external immutable LiveData for the navigation property
     val enteredUserName: LiveData<String>
         get() = _enteredUserName
 
@@ -48,8 +43,8 @@ class MainViewModel : ViewModel() {
         _enteredUserName.value = textEntered
     }
 
-    fun onSearchClicked(){
-        if(textEntered.isEmpty()){
+    fun onSearchClicked() {
+        if (textEntered.isEmpty()) {
             _status.value = GithubApiStatus.EMPTY
             return
         }

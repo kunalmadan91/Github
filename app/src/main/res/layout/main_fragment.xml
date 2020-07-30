@@ -13,7 +13,7 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
+        android:padding="@dimen/dim_10_dp"
         tools:context=".main.MainFragment">
 
 
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:paddingTop="30dp">
+            android:paddingTop="@dimen/dim_30_dp">
 
             <EditText
                 android:id="@+id/text_repo"
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="10dp"
+                android:padding="@dimen/dim_5_dp"
                 android:text="@{viewModel.userInfo.name}"
                 tools:text="hello" />
 
@@ -64,8 +64,35 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/name"
                 android:gravity="center"
-                android:padding="10dp"
+                android:padding="@dimen/dim_5_dp"
                 android:text="@{viewModel.userInfo.company}"
+                tools:text="hello" />
+            <TextView
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/company"
+                android:gravity="center"
+                android:padding="@dimen/dim_5_dp"
+                android:text="@{viewModel.userInfo.login}"
+                tools:text="hello" />
+            <TextView
+                android:id="@+id/url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/login"
+                android:gravity="center"
+                android:padding="@dimen/dim_5_dp"
+                android:text="@{viewModel.userInfo.url}"
+                tools:text="hello" />
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/url"
+                android:gravity="center"
+                android:padding="@dimen/dim_5_dp"
+                android:text="@{viewModel.userInfo.location}"
                 tools:text="hello" />
             <Button
                 android:id="@+id/button_repositories"
@@ -78,7 +105,7 @@
                 android:id="@+id/main_photo_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/company"
+                android:layout_below="@id/location"
                 android:scaleType="centerCrop"
                 app:imageUrl="@{viewModel.userInfo.avatar_url}"
                 tools:src="@tools:sample/backgrounds/scenic" />
@@ -87,8 +114,8 @@
 
         <ImageView
             android:id="@+id/loader"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/dim_200_dp"
+            android:layout_height="@dimen/dim_200_dp"
             android:layout_centerInParent="true"
             android:visibility="gone"
             android:src="@drawable/loading_animation"

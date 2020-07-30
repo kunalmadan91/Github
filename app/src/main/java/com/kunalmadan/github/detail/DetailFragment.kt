@@ -35,7 +35,7 @@ class DetailFragment : Fragment() {
 
         binding.repositoryList.itemAnimator = DefaultItemAnimator()
         detailFragmentViewModel.repositoryInfo.observe(viewLifecycleOwner, Observer {
-            it.let {
+            it?.let {
                 if(it.isEmpty()){
                     binding.emptyRepositories.visibility = View.VISIBLE
                 } else {
@@ -51,7 +51,7 @@ class DetailFragment : Fragment() {
                     binding.loader.visibility = View.GONE
                     Snackbar.make(
                         activity!!.findViewById(android.R.id.content),
-                        "Error Loading Repositories",
+                        getString(R.string.error_loading_repos),
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }

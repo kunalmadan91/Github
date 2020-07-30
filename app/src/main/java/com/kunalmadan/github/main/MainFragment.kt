@@ -47,7 +47,7 @@ class MainFragment : Fragment() {
                     binding.loader.visibility = View.GONE
                     Snackbar.make(
                         activity!!.findViewById(android.R.id.content),
-                        "User name does not exists.",
+                        getString(R.string.username_not_exists),
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
@@ -55,11 +55,13 @@ class MainFragment : Fragment() {
                     binding.loader.visibility = View.VISIBLE
                 GithubApiStatus.DONE ->
                     binding.loader.visibility = View.GONE
-                GithubApiStatus.EMPTY -> Snackbar.make(
-                    activity!!.findViewById(android.R.id.content),
-                    "Kindly enter a user name to proceed.",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                GithubApiStatus.EMPTY -> {
+                    Snackbar.make(
+                        activity!!.findViewById(android.R.id.content),
+                        getString(R.string.empty_user_name),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
             }
         })
 
@@ -69,6 +71,13 @@ class MainFragment : Fragment() {
         })
 
         binding.buttonRepositories.setOnClickListener {
+            if(name.isEmpty()) {
+                Snackbar.make(
+                    activity!!.findViewById(android.R.id.content),
+                    getString(R.string.empty_user_name),
+                    Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             this.findNavController().navigate(MainFragmentDirections.actionShowDetail(name))
         }
         return binding.root
@@ -77,7 +86,7 @@ class MainFragment : Fragment() {
     fun hideSoftKeyBoard(context: Context, view: View) {
         try {
             val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm?.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+            imm.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         } catch (e: Exception) {
             Log.d(TAG,e.message)
         }

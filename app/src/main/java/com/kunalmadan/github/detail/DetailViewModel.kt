@@ -17,22 +17,21 @@ class DetailViewModel(userName: String, app: Application) : AndroidViewModel(app
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private val _status = MutableLiveData<RepositoryApiStatus>()
-
     val status: LiveData<RepositoryApiStatus>
         get() = _status
 
     private val _repositoryInfo = MutableLiveData<List<Repository>>()
-
     val repositoryInfo: LiveData<List<Repository>>
         get() = _repositoryInfo
 
     private var userName = ""
+
     init {
         this.userName = userName
         fetchRepositories()
     }
 
-    fun fetchRepositories(){
+    fun fetchRepositories() {
         coroutineScope.launch {
             var data = GithubApi.retrofitService.getGithubRepos(userName)
             try {
@@ -42,10 +41,10 @@ class DetailViewModel(userName: String, app: Application) : AndroidViewModel(app
                 _repositoryInfo.value = listResult
             } catch (e: Exception) {
                 _status.value = RepositoryApiStatus.ERROR
-                //_userInfo.value = User()
+                _repositoryInfo.value = null
             }
         }
-        }
+    }
 
     override fun onCleared() {
         super.onCleared()
