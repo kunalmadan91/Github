@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import com.google.android.material.snackbar.Snackbar
 import com.kunalmadan.github.R
 import com.kunalmadan.github.databinding.DetailFragmentBinding
-import com.kunalmadan.github.main.GithubApiStatus
 
 class DetailFragment : Fragment() {
 
@@ -48,7 +47,7 @@ class DetailFragment : Fragment() {
         detailFragmentViewModel.status.observe(viewLifecycleOwner, Observer {
                 status->
             when (status){
-                GithubApiStatus.ERROR ->{
+                RepositoryApiStatus.ERROR ->{
                     binding.loader.visibility = View.GONE
                     Snackbar.make(
                         activity!!.findViewById(android.R.id.content),
@@ -56,9 +55,9 @@ class DetailFragment : Fragment() {
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
-                GithubApiStatus.LOADING ->
+                RepositoryApiStatus.LOADING ->
                     binding.loader.visibility = View.VISIBLE
-                GithubApiStatus.DONE -> {
+                RepositoryApiStatus.DONE -> {
                     binding.totalCount.visibility = View.VISIBLE
                     binding.loader.visibility = View.GONE
                 }

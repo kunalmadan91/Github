@@ -4,10 +4,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.kunalmadan.github.main.GithubApiStatus
 import com.kunalmadan.github.network.GithubApi
 import com.kunalmadan.github.network.Repository
 import kotlinx.coroutines.*
+
+enum class RepositoryApiStatus { LOADING, ERROR, DONE }
 
 class DetailViewModel(userName: String, app: Application) : AndroidViewModel(app) {
 
@@ -15,9 +16,9 @@ class DetailViewModel(userName: String, app: Application) : AndroidViewModel(app
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    private val _status = MutableLiveData<GithubApiStatus>()
+    private val _status = MutableLiveData<RepositoryApiStatus>()
 
-    val status: LiveData<GithubApiStatus>
+    val status: LiveData<RepositoryApiStatus>
         get() = _status
 
     private val _repositoryInfo = MutableLiveData<List<Repository>>()
@@ -35,12 +36,12 @@ class DetailViewModel(userName: String, app: Application) : AndroidViewModel(app
         coroutineScope.launch {
             var data = GithubApi.retrofitService.getGithubRepos(userName)
             try {
-                _status.value = GithubApiStatus.LOADING
+                _status.value = RepositoryApiStatus.LOADING
                 val listResult = data.await()
-                _status.value = GithubApiStatus.DONE
+                _status.value = RepositoryApiStatus.DONE
                 _repositoryInfo.value = listResult
             } catch (e: Exception) {
-                _status.value = GithubApiStatus.ERROR
+                _status.value = RepositoryApiStatus.ERROR
                 //_userInfo.value = User()
             }
         }
